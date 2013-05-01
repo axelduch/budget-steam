@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<root>
+  <budget>212.83</budget>
+  <history>
+    <purchase>
+      <game>The witcher 2</game>
+      <price>19.99</price>
+      <date>24/04/2013, 23h37</date>
+    </purchase>
+    <purchase>
+      <game>Cl&#xE9; dota 2</game>
+      <price>1.99</price>
+      <date>30/04/2013, 21h42</date>
+    </purchase>
+  </history>
+</root>
