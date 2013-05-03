@@ -3,13 +3,7 @@ namespace View;
 use Core;
 
 class BudgetManager extends AbstractView {
-    
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    </head>
-<?php
-if (isset($_POST['purchase']) && $_POST['purchase']) {
+/*if (isset($_POST['purchase']) && $_POST['purchase']) {
     if (isset($_POST['game']) && !empty($_POST['game'])
         && isset($_POST['price']) && !empty($_POST['price'])) {
         $budgetManager->addPurchase($_POST['game'], str_replace(',', '.', $_POST['price']));
@@ -27,4 +21,5 @@ echo "Budget disponible: " . $budgetManager->getAvailableBudget() . "€";
 echo $budgetManager->getPurchaseForm();
 ?>
 </html>
+}*/
 }

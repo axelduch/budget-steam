@@ -3,11 +3,15 @@ namespace Core;
 
 abstract class AbstractRouter {
     /**
-     * @var string
+     * @var Route[]
      */
-    protected $_path;
+    protected $_map = array();
     
-    function __construct($path) {
-        $this->_path = $path;
+    function add(Route $route) {
+        $this->_map[] = $route;
     }
+	
+	function resolve() {
+		throw new \Exception("Method Not Implemented", 1);
+	}
 }
