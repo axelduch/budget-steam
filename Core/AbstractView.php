@@ -17,11 +17,11 @@ abstract class AbstractView {
 		}
 	}
 	
-	public function addTemplate(\Core\Template $template) {
+	protected function addTemplate(\Core\Template $template) {
 		$this->_templates[] = $template;
 	}
 	
-	public function setVar($varName, $val) {
+	protected function setVar($varName, $val) {
 		$this->_data['$' . $varName] = $val;
 	}
 }
