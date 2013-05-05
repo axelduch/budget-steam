@@ -15,6 +15,7 @@ class Template {
 	
 	public function __construct($name) {
 		$this->_filename = TPL_DIR . DS . $name . $this->_extension;
+		$this->_name = $name;
 		if (!is_readable($this->_filename)) {
 			Debug::log(sprintf('File is not readable: "%s"', $this->_filename));
 			$this->_IOError = TRUE;
@@ -27,7 +28,7 @@ class Template {
 	 * @param array|string $varValues
 	 * @return string|NULL if an IOError occurred
 	 */
-	public function fetch($varNames, $varValues) {
+	public function fetch(array $vars) {
 		$return = NULL;
 		if (!$this->_IOError) {
 			if (!$this->_fileContents) {
@@ -35,11 +36,17 @@ class Template {
 			}
 			
 			$return = str_replace(
-				$varNames,
-				$varValues,
+				array_map(function ($key) {
+					return '$' . $key;
+				}, array_keys($vars)),
+				array_values($vars),
 				$this->_fileContents
 			);
 		}
 		return $return;
+	}
+	
+	public function getName() {
+		return $this->_name;
 	}
 }

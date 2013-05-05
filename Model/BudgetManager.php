@@ -9,13 +9,14 @@ use \Core\AbstractModel as AbstractModel;
  *  => date
  */ 
 class BudgetManager extends AbstractModel {
-    const DATA_FILEPATH = 'feed.xml';
+	private $_dataFilename; 
     protected $_data;
     protected $_unsavedModification;
-    
+
     public function __construct() {
+    	$this->_dataFilename = ROOT . DS . 'var' . DS . 'data' . DS . 'feed.xml';
         try {
-            $this->_data = simplexml_load_file(self::DATA_FILEPATH);
+            $this->_data = simplexml_load_file($this->_dataFilename);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -25,7 +26,7 @@ class BudgetManager extends AbstractModel {
     protected function load() {
         if (!isset($this->_data)) {
             try {
-                $this->_data = simplexml_load_file(self::DATA_FILEPATH);
+                $this->_data = simplexml_load_file($this->_dataFilename);
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
@@ -71,7 +72,7 @@ class BudgetManager extends AbstractModel {
                 $dom->preserveWhiteSpace = false;
                 $dom->formatOutput = true;
                 $dom->loadXML($this->_data->asXML());
-                file_put_contents(self::DATA_FILEPATH, $dom->saveXML());
+                file_put_contents($this->_dataFilename, $dom->saveXML());
                 $this->_unsavedModification = FALSE;
             } catch (Exception $e) {
                 echo $e->getMessage();
@@ -80,23 +81,6 @@ class BudgetManager extends AbstractModel {
             return FALSE;
         }
         return ! $this->_unsavedModification;
-    }
-    
-    public function getPurchaseForm() {
-        echo 
-        <<<HTML
-<pre>
-    Ajouter un achat
-</pre>
-<form method="POST" action>
-    <lable>Nom du jeu</label><br />
-    <input type="text" name="game" /><br />
-    <label>Prix du jeu</label><br />
-    <input type="text" name="price" /><label>€</label>
-    <input type="hidden" name="purchase" value="1"/>
-    <input type="submit" value="ajouter" />
-</form>
-HTML;
     }
     
     public function getPurchasedItems() {
