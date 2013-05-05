@@ -15,14 +15,18 @@ class Route {
 		$this->_pattern = $pattern;
 		// /controller/:action[/:param1, /:param2, ...]
 		$parts = explode('/', $pattern);
-		list($controllerName, $params) = $parts;
+		list($controllerName, $action, $params) = $parts;
 		if (empty($controllerName)) {
 			$controllerName = '\Controller\Index';
 		} else {
 			$controllerName = '\Controller\\' . $controllerName;
 		}
 		$this->_controllerName = $controllerName;
+		$this->_action = $action;
 		$this->_params = $params;
+	}
+	public function getAction() {
+		return $this->_action;
 	}
 	
 	public function getPattern() {
