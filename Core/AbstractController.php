@@ -1,8 +1,10 @@
 <?php
 namespace Core;
-use View;
+use View, Model;
 
 abstract class AbstractController {
+	/** @var AbstractModel */
+	protected $_model;
 	/** @var AbstractView */
 	protected $_view;
 	/** @var string */
@@ -13,7 +15,9 @@ abstract class AbstractController {
 	public function __construct() {
 		$reflection = new \ReflectionClass($this);
 		$ViewClassName = Helper::replacePrefix('\Controller', '\View\\', $reflection->getName());
+		$ModelClassName = Helper::replacePrefix('\Controller', '\Model\\', $reflection->getName());
 		$this->_view = new $ViewClassName();
+		$this->_model = new $ModelClassName;
 	}
 	
 	/**

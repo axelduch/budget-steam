@@ -1,7 +1,6 @@
 <?php
 namespace Controller;
-use Core\AbstractController as AbstractController,
-	Model\BudgetManager as BudgetManager;
+use Core\AbstractController as AbstractController;
 
 class History extends AbstractController {
 	protected $_availableActions = array(
@@ -24,9 +23,8 @@ class History extends AbstractController {
 	}
 	
 	public function read() {
-		$budgetManager = new BudgetManager();
 		$this->_view->setVar('showForm', TRUE);
-		$this->_view->setVar('items', $budgetManager->getPurchasedItems());
+		$this->_view->setVar('items', $this->_model->getPurchasedItems());
 		$this->_view->init();
 		$this->_view->render();
 	}

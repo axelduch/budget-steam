@@ -8,7 +8,7 @@ use \Core\AbstractModel as AbstractModel;
  *  => price
  *  => date
  */ 
-class BudgetManager extends AbstractModel {
+class History extends AbstractModel {
 	private $_dataFilename; 
     protected $_data;
     protected $_unsavedModification;
