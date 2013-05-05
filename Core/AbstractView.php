@@ -31,10 +31,7 @@ abstract class AbstractView {
 			foreach ($this->_templateData as $item) {
 				foreach ($this->_templates as $template) {
 					/* @var $template Template */
-					echo $template->fetch(
-						array_keys((array) $item),
-						array_values((array) $item)
-					);
+					echo $template->fetch((array) $item);
 				}
 			}
 		}
