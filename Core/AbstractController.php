@@ -8,6 +8,8 @@ abstract class AbstractController {
 	/** @var AbstractView */
 	protected $_view;
 	/** @var string */
+	protected $_defaultAction;
+	/** @var string */
 	protected $_action;
 	/** @var array */
 	protected $_availableActions = array();
@@ -25,8 +27,21 @@ abstract class AbstractController {
 	 */
 	public function init() {
 	}
+
+	public function setDefaultAction($action) {
+		$action = "$action";
+		if (in_array($action, $this->_availableActions)) {
+			$this->_defaultAction = $action;
+		} else {
+			throw new \Exception(sprintf('Provided action "%s" not found in available actions array', $action));
+		}
+	}
 	
 	public function setAction($action) {
-		$this->_action = (string) $action;
+		$this->_action = "$action";
+	}
+	
+	public function onInvalidAction() {
+		$this->_view;
 	}
 }

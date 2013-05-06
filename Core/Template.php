@@ -28,20 +28,23 @@ class Template {
 	 * @param array|string $varValues
 	 * @return string|NULL if an IOError occurred
 	 */
-	public function fetch(array $vars) {
+	public function fetch(array $vars = array()) {
 		$return = NULL;
 		if (!$this->_IOError) {
 			if (!$this->_fileContents) {
 				$this->_fileContents = file_get_contents($this->_filename);
 			}
-			
-			$return = str_replace(
-				array_map(function ($key) {
-					return '$' . $key;
-				}, array_keys($vars)),
-				array_values($vars),
-				$this->_fileContents
-			);
+			if (empty($vars)) {
+				$return = $this->_fileContents;	
+			} else {
+				$return = str_replace(
+					array_map(function ($key) {
+						return '$' . $key;
+					}, array_keys($vars)),
+					array_values($vars),
+					$this->_fileContents
+				);
+			}
 		}
 		return $return;
 	}

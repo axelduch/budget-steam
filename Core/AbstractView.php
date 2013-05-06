@@ -27,13 +27,6 @@ abstract class AbstractView {
 				/* @var $template Template */
 				echo $template->fetch();
 			}
-		} else {
-			foreach ($this->_templateData as $item) {
-				foreach ($this->_templates as $template) {
-					/* @var $template Template */
-					echo $template->fetch((array) $item);
-				}
-			}
 		}
 	}
 	
