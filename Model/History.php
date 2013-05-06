@@ -1,6 +1,7 @@
 <?php
 namespace Model;
-use \Core\AbstractModel as AbstractModel;
+use \Core\AbstractModel as AbstractModel,
+	\Core\Debug as Debug;
 
 /**
  * purchase
@@ -24,10 +25,12 @@ class History extends AbstractModel {
     }
     
     protected function load() {
+    	Debug::log('Entering method ' . __METHOD__);
         if (!isset($this->_data)) {
             try {
                 $this->_data = simplexml_load_file($this->_dataFilename);
             } catch (Exception $e) {
+            	Debug::log($e->getMessage());
                 echo $e->getMessage();
             }
         }

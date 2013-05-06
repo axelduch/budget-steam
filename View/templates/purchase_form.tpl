@@ -1,7 +1,7 @@
 <pre>
     Ajouter un achat
 </pre>
-<form method="POST" action>
+<form method="POST" action="/history/create">
     <lable>Nom du jeu</label><br />
     <input type="text" name="game" /><br />
     <label>Prix du jeu</label><br />

@@ -6,14 +6,14 @@ use Core\AbstractView as AbstractView,
 class History extends AbstractView {
 	public function init() {
 		$this->setTemplateVar('title', 'Historique des achats');
-		$this->addTemplate(new Template('generic_header'));
+		$this->addTemplate(new Template('history_header'));
 		if ($this->_data['showForm'] === TRUE) {
 			$this->addTemplate(new Template('purchase_form'));
 		}
 		// The render method will fetch "n" times the next template
 		// depending on what the model gave to the controller
 		$this->addTemplate(new Template('purchase_item'));
-		$this->addTemplate(new Template('generic_footer'));
+		$this->addTemplate(new Template('history_footer'));
 	}
 	
 	public function render() {
