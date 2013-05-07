@@ -40,7 +40,6 @@ abstract class AbstractView {
 
 	/**
 	 * 
-	 * 
 	 */
 	protected function setTemplateVar($varName, $val) {
 		$this->_templateData[$varName] = $val;
