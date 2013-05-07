@@ -14,11 +14,13 @@ class History extends AbstractController {
 	public function init() {
 		// Map an action to an available action
 		// This is actually implemented as a direct call to a method
-		if (empty($this->_action)) {
+		if (!$this->_action) {
 			$this->setDefaultAction('read');
 		}
 		if (($index = array_search($this->_action, $this->_availableActions))) {
 			$this->{$this->_availableActions[$index]}();
+		} else if ($this->_defaultAction) {
+			$this->{$this->_defaultAction}();
 		} else {
 			unset($this->_view);
 			$this->_view = new \Core\InvalidActionView();

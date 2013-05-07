@@ -28,6 +28,10 @@ abstract class AbstractController {
 	public function init() {
 	}
 
+	/**
+	 * Tries to set default action
+	 * @throws \Exception if provided action is not available
+	 */
 	public function setDefaultAction($action) {
 		$action = "$action";
 		if (in_array($action, $this->_availableActions)) {
