@@ -6,17 +6,13 @@ use Core\AbstractController as AbstractController,
 class History extends AbstractController {
 	/** @var Model */
 	protected $_model;
+	protected static $_defaultAction = 'read';
 	protected $_availableActions = array(
 		'create',
 		'read'
 	);
 	
 	public function init() {
-		// Map an action to an available action
-		// This is actually implemented as a direct call to a method
-		if (!$this->_action) {
-			$this->setDefaultAction('read');
-		}
 		if (($index = array_search($this->_action, $this->_availableActions)) !== -1) {
 			$this->{$this->_availableActions[$index]}();
 		} else if ($this->_defaultAction) {
@@ -38,9 +34,9 @@ class History extends AbstractController {
 			&& Input::hasPost('game')
 			&& Input::hasPost('price')) {
 				$creationStatus = $this->_model->addPurchase(Input::post('game'), Input::post('price'));
-				//$saveStatus = $this->_model->save();
+				$saveStatus = $this->_model->save();
 		}
-		
+		$this->_view->setVar('budget', $this->_model->getAvailableBudget());
 		$this->_view->setVar('showForm', TRUE);
 		switch($creationStatus) {
 			case \Model\History::E_WRONG_GAME_NAME:
@@ -65,6 +61,7 @@ class History extends AbstractController {
 	 */
 	public function read() {
 		$this->_view->setVar('showForm', TRUE);
+		$this->_view->setVar('budget', $this->_model->getAvailableBudget());
 		$this->_view->setVar('items', $this->_model->getPurchasedItems());
 		$this->_view->init();
 		$this->_view->render();

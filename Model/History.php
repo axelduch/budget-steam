@@ -60,7 +60,7 @@ class History extends AbstractModel {
         $date = date('j/m/Y, H\hi');
 		if (!$gameName) {
 			return self::E_WRONG_GAME_NAME;
-		} else if (!preg_match('[0-9.,]+', $price)) {
+		} else if (!preg_match('/[0-9.,]+/', $price)) {
 			return self::E_WRONG_PRICE;
 		}
         $this->load();

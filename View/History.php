@@ -7,21 +7,27 @@ class History extends AbstractView {
 	public function init() {
 		$this->setTemplateVar('title', 'Historique des achats');
 		$this->addTemplate(new Template('history_header'));
-		if ($this->_data['game_name_error'] === TRUE
-			|| $this->_data['price_error'] === TRUE
-			|| $this->_data['duplicate_error'] === TRUE) {
+		$this->setTemplateVar('budget', $this->_data['budget']);
+		// If an error occurred
+		if (isset($this->_data['game_name_error'])
+			|| isset($this->_data['price_error'])
+			|| isset($this->_data['duplicate_error'])) {
+				
 			$this->addTemplate(new Template('purchase_error'));
+			
 			$this->setTemplateVar('game_name_error', '');
 			$this->setTemplateVar('price_error', '');
 			$this->setTemplateVar('duplicate_error', '');
-			if($this->_data['game_name_error'] === TRUE) {
+			
+			if($this->_data['game_name_error']) {
 				$this->setTemplateVar('game_name_error', 'Merci de préciser le nom du jeu');
-			} else if ($this->_data['price_error'] === TRUE) {
+			} else if ($this->_data['price_error']) {
 				$this->setTemplateVar('price_error', 'Le prix ne doit contenir que des chiffres et une virgule ou un point');
-			} else {
+			} else if ($this->_data['duplicate_error']) {
 				$this->setTemplateVar('duplicate_error', 'Le jeu que vous avez entré est déjà enregistré');
 			}
 		}
+		// If form should be shown
 		if ($this->_data['showForm'] === TRUE) {
 			$this->addTemplate(new Template('purchase_form'));
 		}

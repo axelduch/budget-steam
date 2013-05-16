@@ -7,3 +7,4 @@
 	</head>
 	<body>
 		<div id="main">
+		<h1>Budget actuellement disponible: $budget€</h1>
