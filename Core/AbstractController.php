@@ -34,13 +34,25 @@ abstract class AbstractController {
 	/**
 	 * This method implemented to map an action to a method
 	 */
-	public function init() {
+	public function invoke() {
+		Debug::log('Entering method ' . __METHOD__);
+		if (($index = array_search($this->_action, $this->_availableActions)) !== -1) {
+			$this->{$this->_availableActions[$index]}();
+		} else if ($this->_defaultAction) {
+			Debug::log(sprintf('Calling default action "%s"', $this->_defaultAction));
+			$this->{$this->_defaultAction}();
+		} else {
+			unset($this->_view);
+			$this->_view = new \Core\InvalidActionView();
+			$this->_view->init();
+			$this->_view->render();
+		}
 	}
 	/**
 	 * @return string The default action bound to the controller
 	 */
 	public static function getDefaultAction() {
-		return self::$_defaultAction;
+		return static::$_defaultAction;
 	}
 	/**
 	 * Tries to set default action

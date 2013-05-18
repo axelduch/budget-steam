@@ -23,7 +23,7 @@ class History extends AbstractModel {
         try {
             $this->_data = simplexml_load_file($this->_dataFilename);
         } catch (Exception $e) {
-            echo $e->getMessage();
+            //echo $e->getMessage();
         }
         $this->_unsavedModification = FALSE;
     }
@@ -35,7 +35,7 @@ class History extends AbstractModel {
                 $this->_data = simplexml_load_file($this->_dataFilename);
             } catch (Exception $e) {
             	Debug::log($e->getMessage());
-                echo $e->getMessage();
+                //echo $e->getMessage();
             }
         }
     }
@@ -87,7 +87,7 @@ class History extends AbstractModel {
                 file_put_contents($this->_dataFilename, $dom->saveXML());
                 $this->_unsavedModification = FALSE;
             } catch (Exception $e) {
-                echo $e->getMessage();
+                //echo $e->getMessage();
             }
         } else {
             return FALSE;

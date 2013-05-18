@@ -12,18 +12,6 @@ class History extends AbstractController {
 		'read'
 	);
 	
-	public function init() {
-		if (($index = array_search($this->_action, $this->_availableActions)) !== -1) {
-			$this->{$this->_availableActions[$index]}();
-		} else if ($this->_defaultAction) {
-			$this->{$this->_defaultAction}();
-		} else {
-			unset($this->_view);
-			$this->_view = new \Core\InvalidActionView();
-			$this->_view->init();
-			$this->_view->render();
-		}
-	}
 	/**
 	 * POST request to add an entry to purchase history
 	 */

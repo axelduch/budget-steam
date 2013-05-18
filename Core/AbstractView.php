@@ -22,11 +22,9 @@ abstract class AbstractView {
 	 * 
 	 */
 	public function render() {
-		if (empty($this->_templateData)) {
-			foreach ($this->_templates as $template) {
-				/* @var $template Template */
-				echo $template->fetch();
-			}
+		foreach ($this->_templates as $template) {
+			/* @var $template Template */
+			echo $template->fetch($this->_templateData);
 		}
 	}
 	
